@@ -68,8 +68,7 @@ similarity_df.head()
 
 
 def final_recommendation(burger_data, selected_burger_input, min, max, popularity_min):
-  receive = selected_burger_input.split()
-  selected_burger = receive[1]
+  selected_burger = re.sub(r'\[.*?\]\s*', '', selected_burger_input)
   selected_burger_patty = burger_data[burger_data['menu'] == selected_burger]['patty'].values[0]
 
   final_scores = similarity_df[selected_burger].values
