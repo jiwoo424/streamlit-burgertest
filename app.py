@@ -126,7 +126,9 @@ if my_expander.button("Recommend"):
     cols=[col1,col2,col3,col4,col5]
     for i in range(0,5):
             with cols[i]:
-                st.write(<p style="font-size:26px">print[i]</p>)
+                rank = i + 1
+                with cols[i]:
+                    st.write(f'{rank}위')
                 st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
                 # st.write("#")
                 st.write("________")
