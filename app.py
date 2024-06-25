@@ -125,7 +125,7 @@ if my_expander.button("Recommend"):
     cols=[col1,col2,col3,col4,col5]
     if not menu_list:
         st.write('<b style="color:#E50914"> Sorry, no results found! </b>', unsafe_allow_html=True)
-        st.text("가격 범위를 늘려보세요")
+        st.text("가격 범위를 늘려보세요 😢")
 
     else:
         for i in range(0,5):
