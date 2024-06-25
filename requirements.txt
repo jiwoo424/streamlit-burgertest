@@ -2,6 +2,6 @@ streamlit
 numpy
 pandas
 requests
-sklearn
+scikit-learn
 scipy
 pyautogui
