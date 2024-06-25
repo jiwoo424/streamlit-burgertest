@@ -4,7 +4,6 @@ import pandas as pd
 import requests
 import pickle
 import sklearn
-import pyautogui
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -132,7 +131,3 @@ if my_expander.button("Recommend"):
                 st.write("________")
                 st.write(f'<b style="color:#DB4437">가게명</b>:<b> {name_list[i]}</b>',unsafe_allow_html=True)
                 st.write(f'<b style="color:#DB4437">   Price  </b>: <b> {price_list[i]} <b> ',unsafe_allow_html=True)
-
-
-if st.button("Reset"):
-    pyautogui.hotkey("ctrl","F5")
