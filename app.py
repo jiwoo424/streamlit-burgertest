@@ -68,13 +68,12 @@ similarity_df.head()
 
 
 def final_recommendation(burger_data, selected_burger_input, min, max, popularity_min):
-  selected_burger = re.sub(r'\[.*?\]\s*', '', selected_burger_input)
-  selected_burger_patty = burger_data[burger_data['menu'] == selected_burger]['patty'].values[0]
-
-  final_scores = similarity_df[selected_burger].values
-
-  recommendations_df = pd.DataFrame({
-      'id': burger_data['id'],
+    selected_burger = re.sub(r'\[.*?\]\s*', '', selected_burger_input)
+    selected_burger_patty = burger_data[burger_data['menu'] == selected_burger]['patty'].values[0]
+    
+    final_scores = similarity_df[selected_burger].values
+    recommendations_df = pd.DataFrame({
+        'id': burger_data['id'],
     'menu': burger_data['menu'],
     'name': burger_data['name'],
     'class': burger_data['class'],
@@ -84,20 +83,16 @@ def final_recommendation(burger_data, selected_burger_input, min, max, popularit
     'blog': burger_data['blog'],
     'score': final_scores
   })
-
-  filtered_recommendations = recommendations_df[
+    filtered_recommendations = recommendations_df[
         (recommendations_df['class'] == 1) &
         (recommendations_df['price'] >= min) &
         (recommendations_df['price'] < max) &
         ((recommendations_df['visitor'] + recommendations_df['blog']) >= popularity_min) &
         (recommendations_df['patty'].str.contains(selected_burger_patty, na = False))
   ]
-
-  filtered_recommendations = filtered_recommendations.drop_duplicates(subset='menu')
-
-  # 최종 추천 점수를 계산하여 상위 5개 추천 확인
-  final_recommendations = filtered_recommendations[['id', 'menu', 'name', 'price', 'score']].sort_values(by='score', ascending=False).iloc[1:11]
-  return final_recommendations
+    filtered_recommendations = filtered_recommendations.drop_duplicates(subset='menu')
+    final_recommendations = filtered_recommendations[['id', 'menu', 'name', 'price', 'score']].sort_values(by='score', ascending=False).iloc[1:11]
+    return final_recommendations
 
 
 
