@@ -4,9 +4,6 @@ import pandas as pd
 import requests
 import pickle
 import sklearn
-import pyautogui
-import mouseinfo
-_display = Display(os.environ['DISPLAY'])
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -137,5 +134,6 @@ if my_expander.button("Recommend"):
                 st.write(f'<b style="color:#DB4437">가게명</b>:<b> {name_list[i]}</b>',unsafe_allow_html=True)
                 st.write(f'<b style="color:#DB4437">   Price  </b>: <b> {price_list[i]} <b> ',unsafe_allow_html=True)
 
-if st.button("Reset"):
-    pyautogui.hotkey("ctrl","F5")
+if st.button("Foo"):
+    st.session_state.value = "Foo"
+    st.rerun()
