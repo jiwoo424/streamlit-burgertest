@@ -4,7 +4,6 @@ import pandas as pd
 import requests
 import pickle
 import sklearn
-import scipy
 import pyautogui
 
 from sklearn.feature_extraction.text import TfidfVectorizer
