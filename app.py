@@ -4,6 +4,7 @@ import pandas as pd
 import requests
 import pickle
 import sklearn
+import re
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
