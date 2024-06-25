@@ -16,8 +16,8 @@ st.set_page_config(layout="wide")
 
 
 # ''' Backend '''
-franchise_burger = pd.read_csv('/Users/limjiwoo/Desktop/df_franchise.csv')
-premium_burger = pd.read_csv('/Users/limjiwoo/Desktop/df_premium.csv')
+franchise_burger = pd.read_csv('df_franchise.csv')
+premium_burger = pd.read_csv('df_premium.csv')
 
 # 데이터 전처리
 # 프리미엄 버거 가격 숫자형 데이터로 바꾸는 작업
