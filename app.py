@@ -103,10 +103,10 @@ def final_recommendation(burger_data, selected_burger_input, min, max, popularit
 
 
 # ''' Frontend '''
-
-v = st.write(""" <h2> <b style="color:red"> 수제 버거 </b> 추천시스템 🍔</h2>""",unsafe_allow_html=True)
+st.title("[KUBIG 19기 추천시스템팀] 수제버거 추천시스템")
+v = st.write(""" <h2> <b style="color:red"> 수제버거 </b> 추천시스템 🍔</h2>""",unsafe_allow_html=True)
 st.write("##")
-st.write(""" <p> 프랜차이즈 버거로 취향 저격 <b style="color:red">수제 버거</b> 찾기! </p>""",unsafe_allow_html=True)
+st.write(""" <p> 프랜차이즈 버거로 취향 저격 <b style="color:red">수제버거</b> 찾기! </p>""",unsafe_allow_html=True)
 st.write("##")
 my_expander = st.expander("Tap to Select a Burger 🍔")
 selected_burger_name = my_expander.selectbox("내가 좋아하는 프랜차이즈 버거는",franchise_burger['menu_input'])
@@ -126,6 +126,7 @@ if my_expander.button("Recommend"):
     cols=[col1,col2,col3,col4,col5]
     for i in range(0,5):
             with cols[i]:
+                st.write(<p style="font-size:26px">print[i]</p>)
                 st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
                 # st.write("#")
                 st.write("________")
