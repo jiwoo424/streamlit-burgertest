@@ -129,7 +129,9 @@ if my_expander.button("Recommend"):
 
     else:
         for i in range(0,5):
+            rank = i + 1
             with cols[i]:
+                st.write(f'{rank}위 처리')  # 예시: 순위에 따른 처리를 수행합니다.
                 st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
                 # st.write("#")
                 st.write("________")
