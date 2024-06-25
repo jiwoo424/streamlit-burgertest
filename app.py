@@ -123,11 +123,11 @@ if my_expander.button("Recommend"):
     score_list = result['score'].tolist()
     col1,col2,col3,col4,col5=st.columns(5)
     cols=[col1,col2,col3,col4,col5]
-    for i in range(0,5):
+    if not menu_list:
+        st.write('<b style="color:#E50914"> 결과없음 </b>', unsafe_allow_html=True)
+    else:
+        for i in range(0,5):
             with cols[i]:
-                rank = i + 1
-                with cols[i]:
-                    st.write(f'{rank}위')
                 st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
                 # st.write("#")
                 st.write("________")
