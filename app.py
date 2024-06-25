@@ -6,7 +6,7 @@ import pickle
 import sklearn
 import pyautogui
 import mouseinfo
-    _display = Display(os.environ['DISPLAY'])
+_display = Display(os.environ['DISPLAY'])
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
