@@ -105,9 +105,8 @@ def final_recommendation(burger_data, selected_burger_input, min, max, popularit
 # ''' Frontend '''
 st.title("[KUBIG 19기 추천시스템팀] 수제버거 추천시스템")
 v = st.write(""" <h2> <b style="color:red"> 수제버거 </b> 추천시스템 🍔</h2>""",unsafe_allow_html=True)
-st.write("##")
 st.write(""" <p> 프랜차이즈 버거로 취향 저격 <b style="color:red">수제버거</b> 찾기! </p>""",unsafe_allow_html=True)
-st.write("##")
+st.write("#")
 my_expander = st.expander("Tap to Select a Burger 🍔")
 selected_burger_name = my_expander.selectbox("내가 좋아하는 프랜차이즈 버거는",franchise_burger['menu_input'])
 price_range = my_expander.slider("가격 범위 설정", value=[0, 60000])
