@@ -181,12 +181,12 @@ if my_expander.button("Recommend"):
 	    lati.extend(unique_lat_lon['latitude'].tolist())
 	    longi.extend(unique_lat_lon['longitude'].tolist())\
 	
-	map_data = pd.DataFrame({
+map_data = pd.DataFrame({
     'lat': lati,
     'lon': longi,
     'name': result_list,
     })
-    my_map = folium.Map(
+my_map = folium.Map(
 	location=[map_data['lat'].mean(), map_data['lon'].mean()], 
     zoom_start=2)
     for index, row in map_data.iterrows():       # 데이터프레임 한 행 씩 처리
