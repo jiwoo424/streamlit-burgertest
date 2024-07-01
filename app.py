@@ -187,13 +187,13 @@ if my_expander.button("Recommend"):
     })
     my_map = folium.Map(
 	location=[map_data['lat'].mean(), map_data['lon'].mean()], 
-    zoom_start=2)
+    zoom_start=7)
     for index, row in map_data.iterrows():
 	    folium.Marker(
 		    location=[row['lat'], row['lon']],   # 값 표시 위치 (위도, 경도)
 		    popup=row['name'],                   # 팝업에 가게 이름 표시
-		    icon=folium.Icon(icon='cloud')      # 기본 아이콘 사용 (옵션)
+		    icon=folium.Icon(icon='info-sign')      # 기본 아이콘 사용 (옵션)
 	    ).add_to(my_map)
-
+	    
     st.components.v1.html(my_map._repr_html_(), width=800, height=600)
 
