@@ -5,3 +5,6 @@ requests
 scikit-learn
 pyautogui
 mouseinfo
+tqdm
+implicit
+scipy
