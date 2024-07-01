@@ -191,20 +191,19 @@ if my_expander.button("Recommend"):
 	location=[map_data['lat'].mean(), map_data['lon'].mean()], 
     zoom_start=2)
     for index, row in map_data.iterrows():       # 데이터프레임 한 행 씩 처리
-
-    folium.CircleMarker(                     # 원 표시
-        location=[row['lat'], row['lon']],   # 원 중심- 위도, 경도
-        radius=row['value'] / 5,             # 원의 반지름
-        color='pink',                        # 원의 테두리 색상
-        fill=True,                           # 원을 채움
-        fill_opacity=1.0                     # 원의 내부를 채울 때의 투명도
-    ).add_to(my_map)                         # my_map에 원형 마커 추가
-
-    folium.Marker(                           # 값 표시
-        location=[row['lat'], row['lon']],   # 값 표시 위치- 위도, 경도
-        icon=folium.DivIcon(
-        	html=f"<div>{row['name']} {row['value']}</div>"), # 값 표시 방식
-    ).add_to(my_map)                      
-
+	    folium.CircleMarker(                     # 원 표시
+		    location=[row['lat'], row['lon']],   # 원 중심- 위도, 경도
+		    radius=row['value'] / 5,             # 원의 반지름
+		    color='pink',                        # 원의 테두리 색상
+		    fill=True,                           # 원을 채움
+		    fill_opacity=1.0                     # 원의 내부를 채울 때의 투명도
+	    ).add_to(my_map)                         # my_map에 원형 마커 추가
+	    folium.Marker(                           # 값 표시
+		    location=[row['lat'], row['lon']],   # 값 표시 위치- 위도, 경도
+		    icon=folium.DivIcon(
+			    html=f"<div>{row['name']} {row['value']}</div>"), # 값 표시 방식
+	    ).add_to(my_map)                      
+	
+	st.components.v1.html(my_map._repr_html_(), width=800, height=600)
 
 
