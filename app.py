@@ -82,14 +82,14 @@ def final_recommendation(burger_data, selected_burger_input, min, max, popularit
     
     final_scores = similarity_df[selected_burger].values
     recommendations_df = pd.DataFrame({
-        'id': burger_data['id'],
-    'menu': burger_data['menu'],
-    'name': burger_data['name'],
-    'class': burger_data['class'],
-    'price': burger_data['price'],
-    'patty': burger_data['patty'],
-    'visitor': burger_data['visitor'],
-    'blog': burger_data['blog'],
+        'id': burger_data['id'].tolist(),
+    'menu': burger_data['menu'].tolist(),
+    'name': burger_data['name'].tolist(),
+    'class': burger_data['class'].tolist(),
+    'price': burger_data['price'].tolist(),
+    'patty': burger_data['patty'].tolist(),
+    'visitor': burger_data['visitor'].tolist(),
+    'blog': burger_data['blog'].tolist(),
     'score': final_scores
   })
     filtered_recommendations = recommendations_df[
@@ -165,12 +165,6 @@ if my_expander.button("Recommend"):
 
     st.write("#")
     result = final_recommendation(burger_data, selected_burger_name, 0, 20000, 0)
-    
-    menu_list = result['menu'].tolist()
-    id_list = result['id'].tolist()
-    name_list = result['name'].tolist()
-    price_list = result['price'].tolist()
-    score_list = result['score'].tolist()
     
     unique_names = []
     for name in name_list:
