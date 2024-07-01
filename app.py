@@ -6,7 +6,6 @@ import pickle
 import sklearn
 import re
 import numpy as np
-import tqdm 
 import pandas as pd
 import zipfile
 import scipy
