@@ -179,17 +179,16 @@ if my_expander.button("Recommend"):
 	    matching_rows = burger_data[burger_data['name'] == store_name]
 	    unique_lat_lon = matching_rows[['latitude', 'longitude']].drop_duplicates()
 	    lati.extend(unique_lat_lon['latitude'].tolist())
-	    longi.extend(unique_lat_lon['longitude'].tolist())\
-	
-map_data = pd.DataFrame({
+	    longi.extend(unique_lat_lon['longitude'].tolist())
+    map_data = pd.DataFrame({
     'lat': lati,
     'lon': longi,
     'name': result_list,
     })
-my_map = folium.Map(
+    my_map = folium.Map(
 	location=[map_data['lat'].mean(), map_data['lon'].mean()], 
     zoom_start=2)
-for index, row in map_data.iterrows():
+    for index, row in map_data.iterrows():
 	    folium.CircleMarker(                     # 원 표시
 		    location=[row['lat'], row['lon']],   # 원 중심- 위도, 경도
 		    radius=row['value'] / 5,             # 원의 반지름
@@ -201,8 +200,8 @@ for index, row in map_data.iterrows():
 		    location=[row['lat'], row['lon']],   # 값 표시 위치- 위도, 경도
 		    icon=folium.DivIcon(
 			    html=f"<div>{row['name']} {row['value']}</div>"), # 값 표시 방식
-	    ).add_to(my_map)                      
-	
-	st.components.v1.html(my_map._repr_html_(), width=800, height=600)
+	    ).add_to(my_map)           
+	               
+    st.components.v1.html(my_map._repr_html_(), width=800, height=600)
 
 
