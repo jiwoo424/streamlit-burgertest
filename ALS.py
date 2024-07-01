@@ -22,21 +22,11 @@ train = train[['username','restaurant']]
 train.columns = ['user_id', 'rest_id']
 
 # 데이터 <--> 인덱스 교환 딕셔너리
-user2idx = {}
-for i, l in enumerate(train['user_id'].unique()):
-    user2idx[l] = i
-    
-rest2idx = {}
-for i, l in enumerate(train['rest_id'].unique()):
-    rest2idx[l] = i
+user2idx = {l: i for i, l in enumerate(train['user_id'].unique())}
+rest2idx = {l: i for i, l in enumerate(train['rest_id'].unique())}
+idx2user = {i: l for i, l in enumerate(train['user_id'].unique())}
+idx2rest = {i: l for i, l in enumerate(train['rest_id'].unique())}
 
-idx2user = {}
-for i, l in enumerate(train['user_id'].unique()):
-    idx2user[i] = l
-
-idx2rest = {}
-for i, l in enumerate(train['rest_id'].unique()):
-    idx2rest[i] = l
 
 # 인덱스 생성
 data = train.copy()
