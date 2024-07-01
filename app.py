@@ -175,14 +175,13 @@ if my_expander.button("Recommend"):
             st.write("________")
     lati = []
     longi = []
-
     for store_name in result_list:
-    # 해당 가게 이름과 일치하는 행을 필터링
-    matching_rows = burger_data[burger_data['name'] == store_name]
-    unique_lat_lon = matching_rows[['latitude', 'longitude']].drop_duplicates()
-    lati.extend(unique_lat_lon['latitude'].tolist())
-    longi.extend(unique_lat_lon['longitude'].tolist())
-    map_data = pd.DataFrame({
+	    matching_rows = burger_data[burger_data['name'] == store_name]
+	    unique_lat_lon = matching_rows[['latitude', 'longitude']].drop_duplicates()
+	    lati.extend(unique_lat_lon['latitude'].tolist())
+	    longi.extend(unique_lat_lon['longitude'].tolist())\
+	
+	map_data = pd.DataFrame({
     'lat': lati,
     'lon': longi,
     'name': result_list,
