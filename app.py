@@ -121,7 +121,7 @@ if my_expander.button("Recommend"):
     name_list = result['name'].tolist()
     price_list = result['price'].tolist()
     score_list = result['score'].tolist()
-    v = st.write(""" <h2> 당신의 <b style="color:red"> 수제버거 </b> 취향은? 🍔</h2>""",unsafe_allow_html=True)
+    v = st.write(""" 당신의 <b style="color:red"> 수제버거 </b> 취향은? """,unsafe_allow_html=True)
     col1,col2,col3,col4,col5=st.columns(5)
     cols=[col1,col2,col3,col4,col5]
     if not menu_list:
