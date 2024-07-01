@@ -8,7 +8,6 @@ import re
 import numpy as np
 import tqdm 
 import pandas as pd
-import scipy
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
