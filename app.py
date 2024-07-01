@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 import zipfile
 import scipy
+import folium
 from zipfile import ZipFile
 from ALS import als_model, rest2idx, idx2rest, data
 
@@ -172,5 +173,38 @@ if my_expander.button("Recommend"):
             st.write(f' <b style="color:#E50914"> {result_list[i]} </b>',unsafe_allow_html=True)
             # st.write("#")
             st.write("________")
+    lati = []
+    longi = []
+
+    for store_name in result_list:
+    # 해당 가게 이름과 일치하는 행을 필터링
+    matching_rows = burger_data[burger_data['name'] == store_name]
+    unique_lat_lon = matching_rows[['latitude', 'longitude']].drop_duplicates()
+    lati.extend(unique_lat_lon['latitude'].tolist())
+    longi.extend(unique_lat_lon['longitude'].tolist())
+    map_data = pd.DataFrame({
+    'lat': lati,
+    'lon': longi,
+    'name': result_list,
+    })
+    my_map = folium.Map(
+	location=[map_data['lat'].mean(), map_data['lon'].mean()], 
+    zoom_start=2)
+    for index, row in map_data.iterrows():       # 데이터프레임 한 행 씩 처리
+
+    folium.CircleMarker(                     # 원 표시
+        location=[row['lat'], row['lon']],   # 원 중심- 위도, 경도
+        radius=row['value'] / 5,             # 원의 반지름
+        color='pink',                        # 원의 테두리 색상
+        fill=True,                           # 원을 채움
+        fill_opacity=1.0                     # 원의 내부를 채울 때의 투명도
+    ).add_to(my_map)                         # my_map에 원형 마커 추가
+
+    folium.Marker(                           # 값 표시
+        location=[row['lat'], row['lon']],   # 값 표시 위치- 위도, 경도
+        icon=folium.DivIcon(
+        	html=f"<div>{row['name']} {row['value']}</div>"), # 값 표시 방식
+    ).add_to(my_map)                      
+
 
 
