@@ -189,7 +189,7 @@ map_data = pd.DataFrame({
 my_map = folium.Map(
 	location=[map_data['lat'].mean(), map_data['lon'].mean()], 
     zoom_start=2)
-    for index, row in map_data.iterrows():       # 데이터프레임 한 행 씩 처리
+for index, row in map_data.iterrows():
 	    folium.CircleMarker(                     # 원 표시
 		    location=[row['lat'], row['lon']],   # 원 중심- 위도, 경도
 		    radius=row['value'] / 5,             # 원의 반지름
