@@ -5,10 +5,14 @@ import requests
 import pickle
 import sklearn
 import re
-
+import numpy as np
+import tqdm 
+import pandas as pd
+import scipy
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from implicit.als import AlternatingLeastSquares as ALS  
 
 
 
@@ -95,6 +99,40 @@ def final_recommendation(burger_data, selected_burger_input, min, max, popularit
     final_recommendations = filtered_recommendations[['id', 'menu', 'name', 'price', 'score']].sort_values(by='score', ascending=False).iloc[1:11]
     return final_recommendations
 
+# ALS 협업 필터링
+train = pd.read_csv('1차 리뷰 전처리(원본).csv')
+train = train[['username','restaurant']]
+train.columns = ['user_id', 'rest_id']
+
+# 데이터 <--> 인덱스 교환 딕셔너리
+user2idx = {}
+for i, l in enumerate(train['user_id'].unique()):
+    user2idx[l] = i
+    
+rest2idx = {}
+for i, l in enumerate(train['rest_id'].unique()):
+    rest2idx[l] = i
+
+idx2user = {}
+for i, l in enumerate(train['user_id'].unique()):
+    idx2user[i] = l
+
+idx2rest = {}
+for i, l in enumerate(train['rest_id'].unique()):
+    idx2rest[i] = l
+
+# 인덱스 생성
+data = train.copy()
+useridx = data['useridx'] = train['user_id'].apply(lambda x: user2idx[x]).values
+restidx = data['restidx'] = train['rest_id'].apply(lambda x: rest2idx[x]).values
+rating = np.ones(len(data))
+
+# 희소 행렬(csr_matrix)
+purchase_sparse = scipy.sparse.csr_matrix((rating, (useridx, restidx)), shape=(len(set(useridx)), len(set(restidx))))
+# ALS 모델 초기화
+als_model = ALS(factors=40, regularization=0.01, iterations=50)
+# 모델 최적화
+als_model.fit(purchase_sparse)
 
 
 
@@ -121,7 +159,25 @@ if my_expander.button("Recommend"):
     name_list = result['name'].tolist()
     price_list = result['price'].tolist()
     score_list = result['score'].tolist()
-    v = st.write(""" 당신의 <b style="color:red"> 수제버거 </b> 취향은? """,unsafe_allow_html=True)
+    
+    unique_names = []
+    for name in name_list:
+        if name not in unique_names:
+            unique_names.append(name)
+        if len(unique_names) == 5:
+            break
+    related = als_model.similar_items(rest2idx[unique_names[0]])
+    array2list = related[0]
+    number_list = array2list.tolist()
+    
+    result_list = []
+    for idx in number_list:
+        rest_ids = data[data['restidx'] == idx]['rest_id'].unique()
+        for rest_id in rest_ids:
+            if rest_id not in unique_names:
+                result_list.append(rest_id)
+
+    v = st.write("""<h2> 당신의 <b style="color:red"> 수제버거 </b> 취향은? </h2>""",unsafe_allow_html=True)
     col1,col2,col3,col4,col5=st.columns(5)
     cols=[col1,col2,col3,col4,col5]
     if not menu_list:
@@ -137,6 +193,15 @@ if my_expander.button("Recommend"):
                 st.write("________")
                 st.write(f'<b style="color:#DB4437">가게명</b>:<b> {name_list[i]}</b>',unsafe_allow_html=True)
                 st.write(f'<b style="color:#DB4437">   Price  </b>: <b> {price_list[i]} <b> ',unsafe_allow_html=True)
-    v = st.write(""" <h2> 방문해보면 좋을 수제버거 가게 추천 </h2>""",unsafe_allow_html=True)
+    v = st.write(""" <h2> 방문해보면 좋을 수제버거 <b style="color:red"> 가게 </b> 추천 </h2>""",unsafe_allow_html=True)
     col1,col2,col3,col4,col5=st.columns(5)
     cols=[col1,col2,col3,col4,col5]
+    for i in range(0,5):
+        rank = i + 1
+        with cols[i]:
+            st.write(f'{rank}위')
+            st.write(f' <b style="color:#E50914"> {result_list[i]} </b>',unsafe_allow_html=True)
+            # st.write("#")
+            st.write("________")
+
+
