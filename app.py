@@ -11,7 +11,7 @@ import pandas as pd
 import zipfile
 import scipy
 from zipfile import ZipFile
-from ALS import als_model
+from ALS import als_model, rest2idx, idx2rest 
 
 
 
