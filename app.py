@@ -5,6 +5,7 @@ import requests
 import pickle
 import sklearn
 import re
+import tqdm
 import numpy as np
 import pandas as pd
 import zipfile
@@ -142,7 +143,7 @@ purchase_sparse = scipy.sparse.csr_matrix((rating, (useridx, restidx)), shape=(l
 # ALS 모델 초기화
 als_model = ALS(factors=40, regularization=0.01, iterations=50)
 # 모델 최적화
-als_model.fit(purchase_sparse)
+als_model.fit(purchase_sparse, show_progress=False)
 
 
 
