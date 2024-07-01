@@ -7,3 +7,4 @@ pyautogui
 mouseinfo
 tqdm
 implicit
+zipfile
