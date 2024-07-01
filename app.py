@@ -9,6 +9,7 @@ import numpy as np
 import tqdm 
 import pandas as pd
 import scipy
+import zipfile
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -100,7 +101,14 @@ def final_recommendation(burger_data, selected_burger_input, min, max, popularit
     return final_recommendations
 
 # ALS 협업 필터링
-train = pd.read_csv('1차 리뷰 전처리(원본).csv')
+zip_file = 'review_data.csv.zip'
+csv_file = 'review_data.csv'
+
+# ZIP 파일 열기
+with zipfile.ZipFile(zip_file, 'r') as zipf:
+    with zipf.open(csv_file) as file:
+        train = pd.read_csv(file)
+
 train = train[['username','restaurant']]
 train.columns = ['user_id', 'rest_id']
 
