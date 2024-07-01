@@ -118,7 +118,6 @@ price_range = my_expander.slider("가격 범위 설정", value=[0, 42500])
 
 if my_expander.button("Recommend"):
     st.text("Here are few Recommendations..")
-    st.write("#")
     result = final_recommendation(burger_data, selected_burger_name, price_range[0], price_range[1], 0)
 
     menu_list = result['menu'].tolist()
