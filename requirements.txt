@@ -8,3 +8,4 @@ mouseinfo
 tqdm
 implicit
 scipy
+zipfile
