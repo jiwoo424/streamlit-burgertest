@@ -3,6 +3,7 @@ import tqdm
 from implicit.als import AlternatingLeastSquares as ALS  
 import pandas as pd
 import scipy
+from zipfile import ZipFile
 
 
 # ALS 협업 필터링
