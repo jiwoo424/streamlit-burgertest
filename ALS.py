@@ -43,5 +43,5 @@ als_model.fit(purchase_sparse, show_progress=False)
 
 
 # 내보낼 변수와 모델 정의
-__all__ = ['als_model', 'rest2idx', 'user2idx', 'idx2user', 'idx2rest']
+__all__ = ['als_model', 'rest2idx', 'user2idx', 'idx2user', 'idx2rest','data','useridx','restidx','rating']
 
