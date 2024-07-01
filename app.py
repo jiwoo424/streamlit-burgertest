@@ -165,6 +165,13 @@ if my_expander.button("Recommend"):
 
     st.write("#")
     result = final_recommendation(burger_data, selected_burger_name, 0, 20000, 0)
+
+    menu_list = result['menu'].tolist()
+    id_list = result['id'].tolist()
+    name_list = result['name'].tolist()
+    price_list = result['price'].tolist()
+    score_list = result['score'].tolist()
+
     
     unique_names = []
     for name in name_list:
