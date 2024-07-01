@@ -138,7 +138,7 @@ if my_expander.button("Recommend"):
         if len(unique_names) == 5:
             break
             
-    rest2idx = ALS.rest2idx
+    rest2idx = als_model.rest2idx
     related = als_model.similar_items(rest2idx[unique_names[0]])
     
     array2list = related[0]
