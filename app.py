@@ -121,12 +121,12 @@ if my_expander.button("Recommend"):
     name_list = result['name'].tolist()
     price_list = result['price'].tolist()
     score_list = result['score'].tolist()
+    v = st.write(""" <h2> 당신의 <b style="color:red"> 수제버거 </b> 취향은? 🍔</h2>""",unsafe_allow_html=True)
     col1,col2,col3,col4,col5=st.columns(5)
     cols=[col1,col2,col3,col4,col5]
     if not menu_list:
         st.write('<b style="color:#E50914"> Sorry, no results found! </b>', unsafe_allow_html=True)
         st.text("가격 범위를 늘려보세요 😢")
-
     else:
         for i in range(0,5):
             rank = i + 1
@@ -137,3 +137,6 @@ if my_expander.button("Recommend"):
                 st.write("________")
                 st.write(f'<b style="color:#DB4437">가게명</b>:<b> {name_list[i]}</b>',unsafe_allow_html=True)
                 st.write(f'<b style="color:#DB4437">   Price  </b>: <b> {price_list[i]} <b> ',unsafe_allow_html=True)
+    v = st.write(""" <h2> 방문해보면 좋을 수제버거 가게 추천 </h2>""",unsafe_allow_html=True)
+    col1,col2,col3,col4,col5=st.columns(5)
+    cols=[col1,col2,col3,col4,col5]
