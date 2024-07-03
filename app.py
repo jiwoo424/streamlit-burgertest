@@ -13,15 +13,9 @@ import scipy
 import folium
 from zipfile import ZipFile
 from ALS import als_model, rest2idx, idx2rest, data
-
-
-
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from implicit.als import AlternatingLeastSquares as ALS  
-
-
 
 st.set_page_config(layout="wide")
 
@@ -44,10 +38,7 @@ franchise_burger = franchise_burger.rename(columns={
     'brand': 'name',
     'name': 'menu',
 })
-
-
 franchise_burger['menu_input'] = '[' + franchise_burger['name'] + '] ' + franchise_burger['menu']
-
 
 # 프랜차이즈에서 관련있는 행만 모으기
 filtered_franchise_burger = franchise_burger[[ 'name', 'menu', 'price', 'wordlist', 'patty']]
@@ -78,7 +69,6 @@ cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
 similarity_df = pd.DataFrame(cosine_sim, index=burger_data['name'], columns=burger_data['menu'])
 similarity_df.head()
 
-
 def final_recommendation(burger_data, selected_burger_input, min, max, popularity_min):
     selected_burger = re.sub(r'\[.*?\]\s*', '', selected_burger_input)
     selected_burger_patty = burger_data[burger_data['menu'] == selected_burger]['patty'].values[0]
@@ -105,7 +95,6 @@ def final_recommendation(burger_data, selected_burger_input, min, max, popularit
     filtered_recommendations = filtered_recommendations.drop_duplicates(subset='menu')
     final_recommendations = filtered_recommendations[['id', 'menu', 'name', 'price', 'score']].sort_values(by='score', ascending=False).iloc[1:11]
     return final_recommendations
-
 
 # ''' Frontend '''
 st.title("[KUBIG 19기 추천시스템팀] 수제버거 추천시스템")
@@ -195,4 +184,3 @@ if my_expander.button("Recommend"):
 	    ).add_to(my_map)
 	    
     st.components.v1.html(my_map._repr_html_(), width=800, height=600)
-
