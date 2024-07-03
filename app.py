@@ -71,8 +71,12 @@ similarity_df.head()
 
 def final_recommendation(burger_data, selected_burger_input, min, max, popularity_min):
     selected_burger = re.sub(r'\[.*?\]\s*', '', selected_burger_input)
-    selected_burger_patty = burger_data[burger_data['menu'] == selected_burger]['patty'].values[0]
-    
+    selected_burger_patty = burger_data.loc[burger_data['menu'] == selected_burger, 'patty'].values
+    if len(selected_burger_patty) == 0:
+        # 선택된 버거가 데이터에 없는 경우 처리
+        return pd.DataFrame()
+    selected_burger_patty = selected_burger_patty[0]
+
     final_scores = similarity_df[selected_burger].values
     recommendations_df = pd.DataFrame({
         'id': burger_data['id'].tolist(),
@@ -93,7 +97,9 @@ def final_recommendation(burger_data, selected_burger_input, min, max, popularit
         (recommendations_df['patty'].str.contains(selected_burger_patty, na = False))
   ]
     filtered_recommendations = filtered_recommendations.drop_duplicates(subset='menu')
-    final_recommendations = filtered_recommendations[['id', 'menu', 'name', 'price', 'score']].sort_values(by='score', ascending=False).iloc[1:11]
+    final_recommendations = filtered_recommendations[['id', 'menu', 'name', 'price', 'score']] \
+        .sort_values(by='score', ascending=False) \
+        .iloc[:10]
     return final_recommendations
 
 # ''' Frontend '''
