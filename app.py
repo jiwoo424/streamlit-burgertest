@@ -40,7 +40,7 @@ image_dir = "projects/real_image"
 image_files = [f for f in os.listdir(image_dir) if f.endswith(('.jpg', '.png'))]
 
 def find_photo(menu_list, name_list, base_folder):
-    file_name = f"{menu_list}_{name_list}.jpg"
+    file_name = f"{name_list}_{menu_list}.jpg"
     file_path = os.path.join(base_folder, file_name)
     return file_path
 
