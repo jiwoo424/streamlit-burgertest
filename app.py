@@ -150,16 +150,8 @@ if my_expander.button("Recommend"):
         if name not in unique_names:
             unique_names.append(name)
         if len(unique_names) == 5:
-            break  
-    related = als_model.similar_items(rest2idx[unique_names[0]])
-    array2list = related[0]
-    number_list = array2list.tolist()
-    result_list = []
-    for idx in number_list:
-        rest_ids = data[data['rest_idx'] == idx]['rest_id'].unique()
-        for rest_id in rest_ids:
-            if rest_id not in unique_names:
-                result_list.append(rest_id)
+            break
+
     v = st.write("""<h2> 당신의 <b style="color:red"> 수제버거 </b> 취향은? </h2>""",unsafe_allow_html=True)
     col1,col2,col3,col4,col5=st.columns(5)
     cols=[col1,col2,col3,col4,col5]
@@ -184,35 +176,46 @@ if my_expander.button("Recommend"):
                 st.write(f'<b style="color:#DB4437">가게명</b>:<b> {name_list[i]}</b>',unsafe_allow_html=True)
                 st.write(f'<b style="color:#DB4437">   Price  </b>: <b> {price_list[i]} <b> ',unsafe_allow_html=True)
     v = st.write(""" <h2> 방문해보면 좋을 수제버거 <b style="color:red"> 가게 </b> 추천 </h2>""",unsafe_allow_html=True)
-    col1,col2,col3,col4,col5=st.columns(5)
-    cols=[col1,col2,col3,col4,col5]
-    for i in range(0,5):
-        rank = i + 1
-        with cols[i]:
-            st.write(f'{rank}위')
-            st.write(f' <b style="color:#E50914"> {result_list[i]} </b>',unsafe_allow_html=True)
-            # st.write("#")
-            st.write("________")
-    lati = []
-    longi = []
-    for store_name in result_list:
-	    matching_rows = burger_data[burger_data['name'] == store_name]
-	    unique_lat_lon = matching_rows[['latitude', 'longitude']].drop_duplicates()
-	    lati.extend(unique_lat_lon['latitude'].tolist())
-	    longi.extend(unique_lat_lon['longitude'].tolist())
-    map_data = pd.DataFrame({
-    'lat': lati[0:5],
-    'lon': longi[0:5],
-    'name': result_list[0:5],
-    })
-    my_map = folium.Map(
-	location=[map_data['lat'].mean(), map_data['lon'].mean()], 
-    zoom_start=7)
-    for index, row in map_data.iterrows():
-	    folium.Marker(
-		    location=[row['lat'], row['lon']],   # 값 표시 위치 (위도, 경도)
-		    popup=row['name'],                   # 팝업에 가게 이름 표시
-		    icon=folium.Icon(icon='info-sign')      # 기본 아이콘 사용 (옵션)
-	    ).add_to(my_map)
+    try:
+        related = als_model.similar_items(rest2idx[unique_names[0]])
+        array2list = related[0]
+        number_list = array2list.tolist()
+        result_list = []
+        for idx in number_list:
+            rest_ids = data[data['rest_idx'] == idx]['rest_id'].unique()
+            for rest_id in rest_ids:
+                if rest_id not in unique_names:
+                    result_list.append(rest_id)
+        col1,col2,col3,col4,col5=st.columns(5)
+        cols=[col1,col2,col3,col4,col5]
+        for i in range(0,5):
+            rank = i + 1
+            with cols[i]:
+                st.write(f'{rank}위')
+                st.write(f' <b style="color:#E50914"> {result_list[i]} </b>',unsafe_allow_html=True)
+                st.write("________")
+        lati = []
+        longi = []
+        for store_name in result_list:
+	        matching_rows = burger_data[burger_data['name'] == store_name]
+	        unique_lat_lon = matching_rows[['latitude', 'longitude']].drop_duplicates()
+	        lati.extend(unique_lat_lon['latitude'].tolist())
+	        longi.extend(unique_lat_lon['longitude'].tolist())
+        map_data = pd.DataFrame({
+        'lat': lati[0:5],
+        'lon': longi[0:5],
+        'name': result_list[0:5],
+        })
+        my_map = folium.Map(
+    	location=[map_data['lat'].mean(), map_data['lon'].mean()], 
+        zoom_start=7)
+        for index, row in map_data.iterrows():
+    	    folium.Marker(
+	    	    location=[row['lat'], row['lon']],   # 값 표시 위치 (위도, 경도)
+	    	    popup=row['name'],                   # 팝업에 가게 이름 표시
+	    	    icon=folium.Icon(icon='info-sign')      # 기본 아이콘 사용 (옵션)
+	        ).add_to(my_map)
 	    
-    st.components.v1.html(my_map._repr_html_(), width=800, height=600)
+        st.components.v1.html(my_map._repr_html_(), width=800, height=600)
+    except KeyError:
+        st.write("가게 추천 재시도")
