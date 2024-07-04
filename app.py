@@ -165,11 +165,8 @@ if my_expander.button("Recommend"):
         for rest_id in rest_ids:
             if rest_id not in unique_names:
                 result_list.append(rest_id)
-
-burger_image = find_photo(menu_list, name_list, image_dir)
-
-
-v = st.write("""<h2> 당신의 <b style="color:red"> 수제버거 </b> 취향은? </h2>""",unsafe_allow_html=True)
+		    
+	v = st.write("""<h2> 당신의 <b style="color:red"> 수제버거 </b> 취향은? </h2>""",unsafe_allow_html=True)
     col1,col2,col3,col4,col5=st.columns(5)
     cols=[col1,col2,col3,col4,col5]
     if not menu_list:
@@ -181,6 +178,7 @@ v = st.write("""<h2> 당신의 <b style="color:red"> 수제버거 </b> 취향은
 		with cols[i]:
 		    st.write(f'{rank}위')
 		    st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
+burger_image = find_photo(menu_list, name_list, image_dir)
 		    st.image(Image.open(burger_image[i]))
 		    st.write("________")
 		    st.write(f'<b style="color:#DB4437">가게명</b>:<b> {name_list[i]}</b>',unsafe_allow_html=True)
