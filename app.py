@@ -170,7 +170,7 @@ if my_expander.button("Recommend"):
             rank = i + 1
             with cols[i]:
                 st.write(f'{rank}위')
-		        st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
+                st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
                 burger_image = find_photo(menu_list, name_list, image_dir)
 		        st.image(Image.open(burger_image[i]))
 		        st.write("________")
