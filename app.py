@@ -174,7 +174,7 @@ if my_expander.button("Recommend"):
                 burger_image = find_photo(menu_list, name_list, image_dir)
                 
                 try:
-                    image = Image.open(burger_image_paths[i])
+                    image = Image.open(burger_image[i])
                     st.image(image, caption=menu_list[i], use_column_width=True)
                 except FileNotFoundError:
                     st.write("[no image]")
