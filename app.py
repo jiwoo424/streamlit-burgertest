@@ -172,7 +172,11 @@ if my_expander.button("Recommend"):
                 st.write(f'{rank}위')
                 st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
                 burger_image = find_photo(menu_list, name_list, image_dir)
-                st.image(Image.open(burger_image[i]))
+		        try:
+                    mage = Image.open(burger_image_paths[i])
+                    st.image(image, caption=menu_list[i], use_column_width=True)
+                except FileNotFoundError:
+                    st.write("[no image]")
                 st.write("________")
                 st.write(f'<b style="color:#DB4437">가게명</b>:<b> {name_list[i]}</b>',unsafe_allow_html=True)
                 st.write(f'<b style="color:#DB4437">   Price  </b>: <b> {price_list[i]} <b> ',unsafe_allow_html=True)
