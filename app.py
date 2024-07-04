@@ -23,8 +23,18 @@ from implicit.als import AlternatingLeastSquares as ALS
 
 st.set_page_config(layout="wide")
 
-cmd = 'git clone -b master --single-branch https://github.com/Korea-sehun/projects.git'
-subprocess.check_call(cmd, shell=True)
+
+project_dir = 'projects'
+
+
+if not os.path.exists(project_dir):
+    st.write("Cloning repository...")
+    cmd = 'git clone -b master --single-branch https://github.com/Korea-sehun/projects.git'
+    subprocess.check_call(cmd, shell=True)
+    st.write("Repository cloned.")
+else:
+    st.write(f"Directory '{project_dir}' already exists. Skipping clone.")
+
 
 # repository에서 이미지 폴더 경로
 image_dir = "projects/real_image"
