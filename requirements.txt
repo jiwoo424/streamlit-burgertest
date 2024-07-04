@@ -8,6 +8,6 @@ mouseinfo
 tqdm
 implicit
 folium
-PIL
+Pillow
 os
 subprocess
