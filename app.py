@@ -36,22 +36,14 @@ else:
     st.write(f"Directory '{project_dir}' already exists. Skipping clone.")
 
 
-# repository에서 이미지 폴더 경로
 image_dir = "projects/real_image"
-
-# 이미지 파일 목록 가져오기
 image_files = [f for f in os.listdir(image_dir) if f.endswith(('.jpg', '.png'))]
 
-# 여기서부터 프로젝트 목적에 맞게 코드 수정하면 될 것 같습니다~~
-
-# Streamlit 앱 시작
-st.title("Git LFS Images Display")
-
-# 이미지 파일 표시
-for image_file in image_files:
-    image_path = os.path.join(image_dir, image_file)
-    image = Image.open(image_path)
-    st.image(image, caption=image_file)
+def find_photo(menu_list, name_list, base_folder):
+    for menu, name in zip(menu_list, name_list):
+	    file_name = f"{menu}_{name}.jpg"
+	    file_path = os.path.join(base_folder, file_name)
+	    return file_path
 
 # ''' Backend '''
 franchise_burger = pd.read_csv('df_franchise.csv')
@@ -173,6 +165,9 @@ if my_expander.button("Recommend"):
         for rest_id in rest_ids:
             if rest_id not in unique_names:
                 result_list.append(rest_id)
+		    
+    burger_image = find_photo(menu_list, name_list, image_dir)
+
 
     v = st.write("""<h2> 당신의 <b style="color:red"> 수제버거 </b> 취향은? </h2>""",unsafe_allow_html=True)
     col1,col2,col3,col4,col5=st.columns(5)
@@ -186,6 +181,7 @@ if my_expander.button("Recommend"):
             with cols[i]:
                 st.write(f'{rank}위')
                 st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
+		st.image(Image.open(burger_image[i]))
                 # st.write("#")
                 st.write("________")
                 st.write(f'<b style="color:#DB4437">가게명</b>:<b> {name_list[i]}</b>',unsafe_allow_html=True)
