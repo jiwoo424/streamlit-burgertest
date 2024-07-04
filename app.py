@@ -169,7 +169,7 @@ if my_expander.button("Recommend"):
 burger_image = find_photo(menu_list, name_list, image_dir)
 
 
-    v = st.write("""<h2> 당신의 <b style="color:red"> 수제버거 </b> 취향은? </h2>""",unsafe_allow_html=True)
+v = st.write("""<h2> 당신의 <b style="color:red"> 수제버거 </b> 취향은? </h2>""",unsafe_allow_html=True)
     col1,col2,col3,col4,col5=st.columns(5)
     cols=[col1,col2,col3,col4,col5]
     if not menu_list:
