@@ -40,10 +40,9 @@ image_dir = "projects/real_image"
 image_files = [f for f in os.listdir(image_dir) if f.endswith(('.jpg', '.png'))]
 
 def find_photo(menu_list, name_list, base_folder):
-    for menu, name in zip(menu_list, name_list):
-	    file_name = f"{menu}_{name}.jpg"
-	    file_path = os.path.join(base_folder, file_name)
-	    return file_path
+    file_name = f"{menu}_{name}.jpg"
+    file_path = os.path.join(base_folder, file_name)
+    return file_path
 
 # ''' Backend '''
 franchise_burger = pd.read_csv('df_franchise.csv')
