@@ -27,21 +27,19 @@ rest2idx = {l: i for i, l in enumerate(train['rest_id'].unique())}
 idx2user = {i: l for i, l in enumerate(train['user_id'].unique())}
 idx2rest = {i: l for i, l in enumerate(train['rest_id'].unique())}
 
-
-# 인덱스 생성
+# 데이터에 인덱스 추가
 data = train.copy()
-useridx = data['useridx'] = train['user_id'].apply(lambda x: user2idx[x]).values
-restidx = data['restidx'] = train['rest_id'].apply(lambda x: rest2idx[x]).values
+data['user_idx'] = data['user_id'].map(user2idx)
+data['rest_idx'] = data['rest_id'].map(rest2idx)
 rating = np.ones(len(data))
 
-# 희소 행렬(csr_matrix)
-purchase_sparse = scipy.sparse.csr_matrix((rating, (useridx, restidx)), shape=(len(set(useridx)), len(set(restidx))))
-# ALS 모델 초기화
+# 희소 행렬 생성
+purchase_sparse = sparse.csr_matrix((rating, (data['user_idx'], data['rest_idx'])),
+                                   shape=(len(user2idx), len(rest2idx)))
+
+# ALS 모델 초기화 및 학습
 als_model = ALS(factors=40, regularization=0.01, iterations=50)
-# 모델 최적화
 als_model.fit(purchase_sparse, show_progress=False)
 
-
-# 내보낼 변수와 모델 정의
-__all__ = ['als_model', 'rest2idx', 'user2idx', 'idx2user', 'idx2rest','data','useridx','restidx','rating']
-
+# 내보낼 변수 정의
+__all__ = ['als_model', 'rest2idx', 'user2idx', 'idx2user', 'idx2rest', 'data']
