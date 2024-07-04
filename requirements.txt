@@ -8,3 +8,6 @@ mouseinfo
 tqdm
 implicit
 folium
+PIL
+os
+subprocess
