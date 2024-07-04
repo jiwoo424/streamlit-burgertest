@@ -33,13 +33,11 @@ if not os.path.exists(project_dir):
     subprocess.check_call(cmd, shell=True)
 
 # repository에서 이미지 폴더 경로
-image_dir = "projects/Burger/images"
+image_dir = "projects/KUBIG/Burger/images"
 
 # 이미지 파일 목록 가져오기
 image_files = [f for f in os.listdir(image_dir) if f.endswith(('.jpg', '.png'))]
 
-
-st.title("Git LFS Images Display")
 
 
 # 이미지 파일 표시
