@@ -11,6 +11,10 @@ import pandas as pd
 import zipfile
 import scipy
 import folium
+import os
+import subprocess
+
+from PIL import Image
 from zipfile import ZipFile
 from ALS import als_model, rest2idx, idx2rest, data
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -18,6 +22,31 @@ from sklearn.metrics.pairwise import cosine_similarity
 from implicit.als import AlternatingLeastSquares as ALS  
 
 st.set_page_config(layout="wide")
+
+
+# github에서 내 repository 이름
+project_dir = 'projects'
+
+# master branch에 LFS로 저장된 git clone
+if not os.path.exists(project_dir):
+    cmd = 'git clone -b master --single-branch https://github.com/Korea-sehun/projects.git'
+    subprocess.check_call(cmd, shell=True)
+
+# repository에서 이미지 폴더 경로
+image_dir = "projects/Burger/images"
+
+# 이미지 파일 목록 가져오기
+image_files = [f for f in os.listdir(image_dir) if f.endswith(('.jpg', '.png'))]
+
+
+st.title("Git LFS Images Display")
+
+
+# 이미지 파일 표시
+for image_file in image_files:
+    image_path = os.path.join(image_dir, image_file)
+    image = Image.open(image_path)
+    st.image(image, caption=image_file)
 
 
 # ''' Backend '''
