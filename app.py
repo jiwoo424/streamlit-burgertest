@@ -23,30 +23,27 @@ from implicit.als import AlternatingLeastSquares as ALS
 
 st.set_page_config(layout="wide")
 
-# GitHub에서 내 repository 이름
-project_dir = 'projects'
-
 # master branch에 LFS로 저장된 git clone
 if not os.path.exists(project_dir):
-    cmd = 'git clone -b main --single-branch https://github.com/Korea-sehun/projects.git'
+    cmd = 'git clone -b master --single-branch https://github.com/Korea-sehun/projects.git'
     subprocess.check_call(cmd, shell=True)
 
 # repository에서 이미지 폴더 경로
-image_dir = os.path.join(project_dir, "KUBIG/Burger/images")
+image_dir = "projects/real_image"
 
 # 이미지 파일 목록 가져오기
-if os.path.exists(image_dir):
-    image_files = [f for f in os.listdir(image_dir) if f.endswith(('.jpg', '.png'))]
+image_files = [f for f in os.listdir(image_dir) if f.endswith(('.jpg', '.png'))]
 
-    # 이미지 파일 표시
-    for image_file in image_files:
-        image_path = os.path.join(image_dir, image_file)
-        image = Image.open(image_path)
-        st.image(image, caption=image_file)
-else:
-    st.error(f"Error: Directory {image_dir} does not exist.")
+# 여기서부터 프로젝트 목적에 맞게 코드 수정하면 될 것 같습니다~~
 
+# Streamlit 앱 시작
+st.title("Git LFS Images Display")
 
+# 이미지 파일 표시
+for image_file in image_files:
+    image_path = os.path.join(image_dir, image_file)
+    image = Image.open(image_path)
+    st.image(image, caption=image_file)
 
 # ''' Backend '''
 franchise_burger = pd.read_csv('df_franchise.csv')
