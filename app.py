@@ -179,7 +179,7 @@ if my_expander.button("Recommend"):
                     image = Image.open(burger_image_path[i])
                     st.image(image, caption=menu_list[i], use_column_width=True)
                 except FileNotFoundError:
-                    st.write("[no image]")
+                    st.write("[no image]" burger_image_path[i])
                     
                 st.write("________")
                 st.write(f'<b style="color:#DB4437">가게명</b>:<b> {name_list[i]}</b>',unsafe_allow_html=True)
