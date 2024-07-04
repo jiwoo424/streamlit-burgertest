@@ -24,12 +24,18 @@ from implicit.als import AlternatingLeastSquares as ALS
 st.set_page_config(layout="wide")
 
 # GitHub에서 내 repository 이름
+# GitHub에서 내 repository 이름
 project_dir = 'projects'
 
-# master branch에 LFS로 저장된 git clone
+# 특정 커밋 ID에 있는 브랜치 클론
 if not os.path.exists(project_dir):
-    cmd = 'git clone -b main --single-branch https://github.com/Korea-sehun/projects.git'
+    cmd = 'git clone -b master --single-branch https://github.com/Korea-sehun/projects.git'
     subprocess.check_call(cmd, shell=True)
+
+    # 특정 커밋으로 체크아웃
+    os.chdir(project_dir)
+    subprocess.check_call('git checkout 6dc159e2656a4213638d8ce8f1879176001dabdd', shell=True)
+    os.chdir('..')
 
 # repository에서 이미지 폴더 경로
 image_dir = os.path.join(project_dir, "KUBIG/Burger/images")
@@ -45,7 +51,6 @@ if os.path.exists(image_dir):
         st.image(image, caption=image_file)
 else:
     st.error(f"Error: Directory {image_dir} does not exist.")
-
 
 
 # ''' Backend '''
