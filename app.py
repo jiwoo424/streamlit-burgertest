@@ -165,8 +165,8 @@ if my_expander.button("Recommend"):
         for rest_id in rest_ids:
             if rest_id not in unique_names:
                 result_list.append(rest_id)
-		    
-    burger_image = find_photo(menu_list, name_list, image_dir)
+
+burger_image = find_photo(menu_list, name_list, image_dir)
 
 
     v = st.write("""<h2> 당신의 <b style="color:red"> 수제버거 </b> 취향은? </h2>""",unsafe_allow_html=True)
