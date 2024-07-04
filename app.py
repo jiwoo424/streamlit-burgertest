@@ -176,9 +176,9 @@ if my_expander.button("Recommend"):
         st.write('<b style="color:#E50914"> Sorry, no results found! </b>', unsafe_allow_html=True)
         st.text("가격 범위를 늘려보세요 😢")
     else:
-        for i in range(0,5):
-            rank = i + 1
-            with cols[i]:
+	for i in range(0,5):
+		rank = i + 1
+		with cols[i]:
 		    st.write(f'{rank}위')
 		    st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
 		    st.image(Image.open(burger_image[i]))
