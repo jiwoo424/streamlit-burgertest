@@ -23,12 +23,8 @@ from implicit.als import AlternatingLeastSquares as ALS
 
 st.set_page_config(layout="wide")
 
-project_dir = "streamlit-burgertest/real_image"
-
-
-if not os.path.exists(project_dir):
-	cmd = 'git clone -b master --single-branch https://github.com/Korea-sehun/projects.git'
-	subprocess.check_call(cmd, shell=True)
+cmd = 'git clone -b master --single-branch https://github.com/Korea-sehun/projects.git'
+subprocess.check_call(cmd, shell=True)
 
 # repository에서 이미지 폴더 경로
 image_dir = "projects/real_image"
