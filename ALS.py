@@ -5,6 +5,8 @@ import pandas as pd
 import scipy
 from zipfile import ZipFile
 import zipfile
+import scipy.sparse as sparse
+
 
 
 # ALS 협업 필터링
