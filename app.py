@@ -145,6 +145,8 @@ if my_expander.button("Recommend"):
     price_list = result['price'].tolist()
     score_list = result['score'].tolist()
     unique_names = []
+    burger_image_path = []	
+	
     for name in name_list:
         if name not in unique_names:
             unique_names.append(name)
@@ -167,12 +169,19 @@ if my_expander.button("Recommend"):
         st.text("가격 범위를 늘려보세요 😢")
     else:
         for i in range(0,5):
+			burger_image = find_photo(menu_list[i], name_list[i], base_folder)
+			burger_image_path.append(burger_image)
             rank = i + 1
             with cols[i]:
                 st.write(f'{rank}위')
                 st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
                 burger_image = find_photo(menu_list, name_list, image_dir)
-                
+                paths = []
+
+for i in range(3):  # 첫 3개 메뉴에 대해서만 예시로 경로 찾기
+    path = find_photo(menu_list[i], name_list[i], base_folder)
+    paths.append(path)
+
                 try:
                     image = Image.open(burger_image[i])
                     st.image(image, caption=menu_list[i], use_column_width=True)
