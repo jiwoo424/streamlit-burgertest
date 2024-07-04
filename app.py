@@ -23,10 +23,9 @@ from implicit.als import AlternatingLeastSquares as ALS
 
 st.set_page_config(layout="wide")
 
-project_dir = "Korea-sehun/projects/real_image"
+project_dir = "streamlit-burgertest/real_image"
 
 
-# master branch에 LFS로 저장된 git clone
 if not os.path.exists(project_dir):
 	cmd = 'git clone -b master --single-branch https://github.com/Korea-sehun/projects.git'
 	subprocess.check_call(cmd, shell=True)
