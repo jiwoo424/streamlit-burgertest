@@ -166,16 +166,16 @@ if my_expander.button("Recommend"):
         st.write('<b style="color:#E50914"> Sorry, no results found! </b>', unsafe_allow_html=True)
         st.text("가격 범위를 늘려보세요 😢")
     else:
-	for i in range(0,5):
-		rank = i + 1
-		with cols[i]:
-		    st.write(f'{rank}위')
-		    st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
-            burger_image = find_photo(menu_list, name_list, image_dir)
-		    st.image(Image.open(burger_image[i]))
-		    st.write("________")
-		    st.write(f'<b style="color:#DB4437">가게명</b>:<b> {name_list[i]}</b>',unsafe_allow_html=True)
-		    st.write(f'<b style="color:#DB4437">   Price  </b>: <b> {price_list[i]} <b> ',unsafe_allow_html=True)
+        for i in range(0,5):
+            rank = i + 1
+            with cols[i]:
+                st.write(f'{rank}위')
+		        st.write(f' <b style="color:#E50914"> {menu_list[i]} </b>',unsafe_allow_html=True)
+                burger_image = find_photo(menu_list, name_list, image_dir)
+		        st.image(Image.open(burger_image[i]))
+		        st.write("________")
+		        st.write(f'<b style="color:#DB4437">가게명</b>:<b> {name_list[i]}</b>',unsafe_allow_html=True)
+		        st.write(f'<b style="color:#DB4437">   Price  </b>: <b> {price_list[i]} <b> ',unsafe_allow_html=True)
     v = st.write(""" <h2> 방문해보면 좋을 수제버거 <b style="color:red"> 가게 </b> 추천 </h2>""",unsafe_allow_html=True)
     col1,col2,col3,col4,col5=st.columns(5)
     cols=[col1,col2,col3,col4,col5]
