@@ -169,8 +169,8 @@ if my_expander.button("Recommend"):
         st.text("가격 범위를 늘려보세요 😢")
     else:
         for i in range(0,5):
-			burger_image = find_photo(menu_list[i], name_list[i], image_dir)
-			burger_image_path.append(burger_image)
+            burger_image = find_photo(menu_list[i], name_list[i], image_dir)
+            burger_image_path.append(burger_image)
             rank = i + 1
             with cols[i]:
                 st.write(f'{rank}위')
