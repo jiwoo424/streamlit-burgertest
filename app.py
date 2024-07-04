@@ -156,7 +156,7 @@ if my_expander.button("Recommend"):
     number_list = array2list.tolist()
     result_list = []
     for idx in number_list:
-        rest_ids = data[data['restidx'] == idx]['rest_id'].unique()
+        rest_ids = data[data['rest_idx'] == idx]['rest_id'].unique()
         for rest_id in rest_ids:
             if rest_id not in unique_names:
                 result_list.append(rest_id)
