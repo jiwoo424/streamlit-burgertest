@@ -9,4 +9,3 @@ tqdm
 implicit
 folium
 Pillow
-subprocess
