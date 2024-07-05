@@ -170,7 +170,7 @@ if my_expander.button("Recommend"):
                     image = Image.open(burger_image_path[i])
                     st.image(image, caption=menu_list[i], use_column_width=True)
                 except FileNotFoundError:
-                    no_image = Image.open(jiwoo424/streamlit-burgertest/no_image.jpg)
+                    no_image = Image.open(streamlit-burgertest/no_image.jpg)
                     st.image(no_image)
 
                     
