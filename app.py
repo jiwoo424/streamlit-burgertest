@@ -171,7 +171,7 @@ if my_expander.button("Recommend"):
                     st.image(image, caption=menu_list[i], use_column_width=True)
                 except FileNotFoundError:
                     no_image = Image.open('no_image.jpg')
-                    st.image(no_image)
+                    st.image(no_image, caption="no image")
 
                     
                 st.write("________")
